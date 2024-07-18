@@ -1,0 +1,24 @@
+{
+  "cinema": "CINEMA",
+  "movies": [
+    {
+      "title": "TITLE",
+      "premiere": "DATE_OF_PREMIERE",
+      "presale": "TRUE | FALSE",
+      "schedule": [
+        {
+          "theater": "THEATER",
+          "date": "DATE_OF_MOVIE",
+          "showtime": [
+            {
+              "dim": "DIM",
+              "lang": "LANG",
+              "time": "TIME",
+              "roomType": "ROOM_TYPE"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
