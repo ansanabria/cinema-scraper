@@ -1,10 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
-import { writeFile } from 'fs';
 import puppeteer, { Browser } from 'puppeteer';
 import cinemasInitialData, { CinemaInitialData } from './data.js';
-import { Cinema } from './types.js';
-import { Database } from './supabase.js';
 import { parseSpanishDate } from './helper.js';
+import { Database } from './supabase.js';
+import { Cinema } from './types.js';
 
 const supabase = createClient<Database>(
   process.env.SUPABASE_PROJECT_URL,
