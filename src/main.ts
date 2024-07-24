@@ -62,7 +62,7 @@ async function scrapeCinema(
 }
 
 async function main() {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch();
 
   const cinemas = await Promise.all(
     cinemasInitialData.map(
