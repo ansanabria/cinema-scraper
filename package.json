@@ -32,7 +32,6 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.44.4",
     "date-fns": "^3.6.0",
-    "moviedb-promise": "^4.0.7",
     "puppeteer": "^22.13.0",
     "tslib": "~2.6"
   },
