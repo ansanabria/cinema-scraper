@@ -55,7 +55,8 @@ async function scrapeCinema(
   const movies = rawMovies.map((mov) => {
     const premiere = parseSpanishDate(mov.premiere).toISOString();
     const href = new URL(mov.href, cinemaInitialData.url).toString();
-    return { ...mov, premiere, href };
+    const date = new Date().toISOString();
+    return { ...mov, premiere, href, date };
   });
 
   return { cinema: cinemaInitialData.cinema, movies };
@@ -75,18 +76,15 @@ async function main() {
 
   await browser.close();
 
-  writeFile('src/data.json', JSON.stringify(cinemas), (err) => err);
-
   cinemas.forEach(async (cin) => {
-    cin.movies.forEach(async ({ title, href, type, premiere }) => {
+    cin.movies.forEach(async ({ title, href, type, premiere, date }) => {
       // Add title to the 'movies' db
       let movTitle = await fetchMovieTitle(title);
       if (movTitle === undefined) {
         await supabase.from('movies').insert({ name: title });
+        movTitle = await fetchMovieTitle(title);
       }
 
-      // Add title to the cinema
-      movTitle = await fetchMovieTitle(title);
       const { data: cinemaData, error: cinemaError } = await supabase
         .from('cinemas')
         .select()
@@ -96,11 +94,17 @@ async function main() {
       if (cinemaData.length === 0) {
         await supabase.from('cinemas').insert({
           cinema: cin.cinema,
+          date,
           href,
+          movie_id: movTitle.id,
           type,
           premiere,
-          movie_id: movTitle.id,
         });
+      } else {
+        await supabase
+          .from('cinemas')
+          .update({ date })
+          .eq('id', cinemaData.at(0).id);
       }
     });
   });

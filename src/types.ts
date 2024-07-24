@@ -1,6 +1,7 @@
 export interface Movie {
   title: string;
   premiere: string;
+  date: string;
   type: string;
   href: string;
 }

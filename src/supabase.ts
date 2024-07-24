@@ -12,6 +12,7 @@ export type Database = {
       cinemas: {
         Row: {
           cinema: string
+          date: string
           href: string
           id: string
           movie_id: string
@@ -20,6 +21,7 @@ export type Database = {
         }
         Insert: {
           cinema: string
+          date: string
           href: string
           id?: string
           movie_id: string
@@ -28,6 +30,7 @@ export type Database = {
         }
         Update: {
           cinema?: string
+          date?: string
           href?: string
           id?: string
           movie_id?: string
