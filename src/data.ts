@@ -1,10 +1,10 @@
-export interface Cinema {
+export interface CinemaInitialData {
   cinema: string;
   url: URL;
   parentSelector: string;
 }
 
-const cinemas: Cinema[] = [
+const cinemasInitialData: CinemaInitialData[] = [
   {
     cinema: 'Cine Colombia',
     url: new URL('https://www.cinecolombia.com/bogota/cartelera'),
@@ -30,4 +30,4 @@ const cinemas: Cinema[] = [
   // },
 ];
 
-export default cinemas;
+export default cinemasInitialData;
