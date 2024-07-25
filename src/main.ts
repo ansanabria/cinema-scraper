@@ -4,6 +4,7 @@ import cinemasInitialData, { CinemaInitialData } from './data.js';
 import { parseSpanishDate } from './helper.js';
 import { Database } from './supabase.js';
 import { Cinema } from './types.js';
+import { format } from 'date-fns';
 
 const supabase = createClient<Database>(
   process.env.SUPABASE_PROJECT_URL,
@@ -54,7 +55,7 @@ async function scrapeCinema(
   const movies = rawMovies.map((mov) => {
     const premiere = parseSpanishDate(mov.premiere).toISOString();
     const href = new URL(mov.href, cinemaInitialData.url).toString();
-    const date = new Date().toISOString();
+    const date = new Date(new Date().toLocaleDateString('es-CO')).toISOString();
     return { ...mov, premiere, href, date };
   });
 
