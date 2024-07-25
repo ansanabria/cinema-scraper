@@ -4,7 +4,6 @@ import cinemasInitialData, { CinemaInitialData } from './data.js';
 import { parseSpanishDate } from './helper.js';
 import { Database } from './supabase.js';
 import { Cinema } from './types.js';
-import { format } from 'date-fns';
 
 const supabase = createClient<Database>(
   process.env.SUPABASE_PROJECT_URL,
