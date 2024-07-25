@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import puppeteer, { Browser } from 'puppeteer';
 import cinemasInitialData, { CinemaInitialData } from './data.js';
-import { parseSpanishDate } from './helper.js';
+import { getCurrentDate, parseSpanishDate } from './helper.js';
 import { Database } from './supabase.js';
 import { Cinema } from './types.js';
 
@@ -54,7 +54,7 @@ async function scrapeCinema(
   const movies = rawMovies.map((mov) => {
     const premiere = parseSpanishDate(mov.premiere).toISOString();
     const href = new URL(mov.href, cinemaInitialData.url).toString();
-    const date = new Date(new Date().toLocaleDateString('es-CO')).toISOString();
+    const date = getCurrentDate('es-CO');
     return { ...mov, premiere, href, date };
   });
 
@@ -102,7 +102,7 @@ async function main() {
       } else {
         await supabase
           .from('cinemas')
-          .update({ date })
+          .update({ date, type })
           .eq('id', cinemaData.at(0).id);
       }
     });
